@@ -23,4 +23,13 @@ jobs:
         run: npm install -g expo-cli
 
       - name: Build APK
-        run: npx expo build:android --no-wait
+      - name: Install EAS CLI
+  run: npm install -g eas-cli
+
+- name: Login to Expo
+  run: npx eas login --non-interactive
+  env:
+    EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
+- name: Build APK
+  run: npx eas build --platform android --profile preview --non-interactive     
